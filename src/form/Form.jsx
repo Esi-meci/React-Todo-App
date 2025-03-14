@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./form.css";
 import Button from "../button/Button";
 import { v4 as uniqueId } from "uuid";
-import { list } from "postcss";
 import Delete from "../delete/Delete_item";
 import DeleteAll from "../delete/Delete_all";
 import Time from "../time/Time";
