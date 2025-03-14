@@ -7,9 +7,6 @@ export default function Delete({ id, tasks, setTask }) {
     const filteredTask = tasks.filter((eachTask) => id === eachTask.id);
     tasks.splice(tasks.indexOf(filteredTask[0]), 1);
     setTask([...tasks]);
-
-    // console.log(filteredTask)
-    // console.log(tasks)
   }
 
   return <TrashIcon className="trash_btn text-xl" onClick={deleteSingleTask} />;

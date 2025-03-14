@@ -7,6 +7,7 @@ import Delete from "../delete/Delete_item";
 import DeleteAll from "../delete/Delete_all";
 import Time from "../time/Time";
 import { EyeDropperIcon } from "@heroicons/react/16/solid";
+import UpdateTask from "../update/Update";
 
 export default function Form() {
   // const [tasks, setTask] = useState([]) starting our state with an empty array
@@ -17,34 +18,14 @@ export default function Form() {
   const [editTask, setEditTask] = useState(null);
   const [editedText, setEditedText] = useState("");
 
-  function Update(task, tiles) {
+  function Update(task, titles) {
     setEditTask(task); //opens the modal
-    setEditedText(tiles); // sets the model input value to the previous title
-  }
-
-  function saveEdit() {
-    // const cloneTasks = tasks;
-    // const CurrentTask = cloneTasks.filter((tod) => tod.id === editTask.id);
-    // CurrentTask[0].title = editedText;
-    // cloneTasks.splice(cloneTasks.indexOf(CurrentTask[0]), 1, CurrentTask[0]);
-    // console.log(cloneTasks);
-    // setTask(cloneTasks);
-    const updatedTask = tasks.map((task) =>
-      task.id === editTask.id ? { ...task, title: editedText } : task
-    );
-    console.log(updatedTask);
-    setTask(updatedTask);
-    CloseModal(); //this closes the modal
-  }
-
-  function CloseModal() {
-    setEditTask(null);
+    setEditedText(titles); // sets the model input value to the previous title
   }
 
   function handleSubmit(e) {
-    // console.log(e.target)
-    // console.log(e.target.querySelector('.taskInput').value) this will work for class
-    //console.log(typeof(e.currentTarget.taskInput.value)) while this will work for id
+    // (e.target.querySelector('.taskInput').value) this will work for class
+    //(typeof(e.currentTarget.taskInput.value)) while this will work for id
     e.preventDefault();
     // const inputValue = e.target.taskInput.value.trim()  //works perfectly
 
@@ -70,7 +51,6 @@ export default function Form() {
       alert("can not add an empty task");
     }
     // e.target.taskInput.value = ''
-    // console.log(new Date())
     inputValue.value = " ";
   }
 
@@ -128,37 +108,14 @@ export default function Form() {
 
       {/* Edit Modal */}
       {editTask && (
-        <div
-          className="flex justify-center items-center absolute inset-0 bg-opacity-70 bg-black text-lg"
-          onClick={CloseModal}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-pri p-5 rounded"
-          >
-            <h3 className="pl-2">Edit {editedText} Task </h3>
-            <form onSubmit={saveEdit}>
-              <input
-                type="text"
-                value={editedText}
-                className="text-black text-lg p-1 m-1.5 rounded"
-                onChange={(e) => setEditedText(e.target.value)}
-                autoFocus
-              />
-              <input
-                type="button"
-                className="rounded-[5px] font-medium bg-red-800 py-[3px] px-2.5 border-solid border hover:bg-red-950"
-                onClick={CloseModal}
-                value="Cancle"
-              />
-              <input
-                type="submit"
-                className="rounded-[5px] font-medium ml-3 bg-green-700 py-[3px] px-3 border border-solid border-white"
-                value="Save"
-              />
-            </form>
-          </div>
-        </div>
+        <UpdateTask
+          setEditTask={setEditTask}
+          setEditedText={setEditedText}
+          editTask={editTask}
+          editedText={editedText}
+          setTask={setTask}
+          tasks={tasks}
+        />
       )}
     </>
   );

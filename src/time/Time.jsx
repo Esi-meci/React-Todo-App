@@ -2,7 +2,6 @@ import { memo } from "react";
 
 const currentDate = new Date();
 const currenthour = currentDate.getHours();
-// const minutes = currentDate.getMinutes()
 
 function Time(props) {
   let [hours, minutes] = props.date;
